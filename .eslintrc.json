@@ -1,5 +1,6 @@
 {
   "extends": "next/core-web-vitals",
+  
 
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn", // using "any" type 에 대한 경고
