@@ -53,7 +53,7 @@ function LineCard() {
             pointStyle: false,
           },
           {
-            label: 'Chart02',
+            label: '',
             data: [
               532, 532, 532, 404, 404, 314, 314, 314, 314, 314, 234, 314, 234,
               234, 314, 314, 314, 388, 314, 202, 202, 202, 202, 314, 720, 642,
@@ -83,8 +83,38 @@ function LineCard() {
             display: false,
           },
           tooltip: {
-            usePointStyle: true,
-            callbacks: {},
+            displayColors: false,
+
+            enabled: true,
+            backgroundColor: 'rgb(255,255,255)',
+            boxWidth: 1,
+            bodyColor: '#FF0000',
+            bodyFont: {
+              size: 14,
+              family: 'Arial',
+              style: 'normal',
+              weight: 'normal',
+              lineHeight: 1.2,
+            },
+            callbacks: {
+              title: function () {
+                return '';
+              },
+              label: function (context) {
+                let label = context.dataset.label || '';
+
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed.y !== null) {
+                  label += new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                  }).format(context.parsed.y);
+                }
+                return label;
+              },
+            },
           },
         },
 
