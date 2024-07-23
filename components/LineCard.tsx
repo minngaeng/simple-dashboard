@@ -59,10 +59,12 @@ function LineCard() {
               234, 314, 314, 314, 388, 314, 202, 202, 202, 202, 314, 720, 642,
             ],
             fill: false,
-            borderColor: 'rgb(128,128,130)',
+            borderColor: 'rgb(229, 231, 235)',
             tension: 0.2,
             pointHitRadius: 7,
             pointRadius: 0.1,
+
+            pointHoverBorderWidth: 0.1,
           },
         ],
       },
@@ -70,13 +72,6 @@ function LineCard() {
         interaction: {
           mode: 'point',
         },
-        // events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
-        // onHover: function (event, elements) {
-        //   console.log(elements);
-        //   if (elements.length) {
-        //     elements[0].element.options.radius = 5; // Hover 시 포인트를 보이게 설정
-        //   }
-        // },
 
         plugins: {
           legend: {
@@ -136,3 +131,11 @@ function LineCard() {
 }
 
 export default LineCard;
+
+// events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
+// onHover: function (event, elements) {
+//   console.log(elements);
+//   if (elements.length) {
+//     elements[0].element.options.radius = 5; // Hover 시 포인트를 보이게 설정
+//   }
+// },
