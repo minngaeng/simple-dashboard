@@ -63,7 +63,6 @@ function LineCard() {
             tension: 0.2,
             pointHitRadius: 7,
             pointRadius: 0.1,
-
             pointHoverBorderWidth: 0.1,
           },
         ],
@@ -79,7 +78,8 @@ function LineCard() {
           },
           tooltip: {
             displayColors: false,
-
+            caretSize: 0,
+            caretPadding: 15,
             enabled: true,
             backgroundColor: 'rgb(255,255,255)',
             boxWidth: 1,
