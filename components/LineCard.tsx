@@ -1,5 +1,4 @@
 'use client';
-
 import { Chart } from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
 
@@ -12,10 +11,6 @@ function LineCard() {
     const ctx = canvas.current.getContext('2d');
 
     if (ctx) {
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.current.height);
-      gradient.addColorStop(0, 'rgba(132, 112, 255, 0.8)');
-      gradient.addColorStop(1, 'rgb(132, 112, 255)');
-
       const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -54,9 +49,23 @@ function LineCard() {
                 732, 610, 610, 504, 504, 504, 349, 349, 504, 342, 504, 610, 391,
                 192, 154, 273, 191, 191, 126, 263, 349, 252, 423, 622, 470, 532,
               ],
-              fill: false,
+              fill: true,
               borderColor: '#8470FF',
-              backgroundColor: gradient,
+              backgroundColor: ({ chart }) => {
+                const { chartArea } = chart;
+                if (chartArea) {
+                  const gradient = ctx.createLinearGradient(
+                    0,
+                    chartArea.bottom,
+                    0,
+                    chartArea.top,
+                  );
+                  gradient.addColorStop(0, 'red');
+                  gradient.addColorStop(1, 'blue');
+                  return gradient;
+                }
+                return 'transparent';
+              },
               tension: 0.2,
               pointHitRadius: 10,
               pointRadius: 0.1,
@@ -82,7 +91,6 @@ function LineCard() {
           interaction: {
             mode: 'point',
           },
-
           plugins: {
             legend: {
               display: false,
