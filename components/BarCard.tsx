@@ -1,6 +1,6 @@
 'use client';
 import { Chart } from 'chart.js';
-import { callback } from 'chart.js/helpers';
+
 import React, { useEffect, useRef } from 'react';
 
 const BarCard = () => {
