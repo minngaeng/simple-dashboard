@@ -2,7 +2,8 @@
 import { Chart } from 'chart.js';
 
 import React, { useEffect, useRef } from 'react';
-// clg
+// clgclg
+
 const BarCard = () => {
   const canvas = useRef<HTMLCanvasElement | null>(null);
 
