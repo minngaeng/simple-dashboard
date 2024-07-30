@@ -49,7 +49,7 @@ function LineCard() {
                 732, 610, 610, 504, 504, 504, 349, 349, 504, 342, 504, 610, 391,
                 192, 154, 273, 191, 191, 126, 263, 349, 252, 423, 622, 470, 532,
               ],
-              fill: true,
+              fill: false,
               borderColor: '#8470FF',
               backgroundColor: ({ chart }) => {
                 const { chartArea } = chart;
