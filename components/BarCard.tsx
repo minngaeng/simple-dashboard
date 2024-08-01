@@ -46,7 +46,7 @@ const BarCard = () => {
           },
         ],
       };
-      // #67BFFF
+
       const config = {
         type: 'bar',
         data: data,
@@ -88,7 +88,6 @@ const BarCard = () => {
 
       const chartInstance = new Chart(canvas.current, config);
 
-      // Cleanup function to destroy chart instance when component unmounts
       return () => {
         chartInstance.destroy();
       };
@@ -99,9 +98,6 @@ const BarCard = () => {
 };
 
 export default BarCard;
-
-//const myChart = new Chart(
-// document.getElementById('myChart'),
 
 const formatDateLabel = (dateLabel: string) => {
   const date = new Date(dateLabel);
@@ -114,3 +110,6 @@ const formatDateLabel = (dateLabel: string) => {
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+
+//const myChart = new Chart(
+// document.getElementById('myChart'),

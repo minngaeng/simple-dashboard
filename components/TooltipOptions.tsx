@@ -20,22 +20,7 @@ const TooltipOptions = () => {
       title: function () {
         return '';
       },
-      // label: function (context: any) {
-      //   let label = context.dataset.label || '';
 
-      //   if (label) {
-      //     label += ': ';
-      //   }
-      //   if (context.parsed.y !== null) {
-      //     label += new Intl.NumberFormat('en-US', {
-      //       style: 'currency',
-      //       currency: 'USD',
-      //       minimumFractionDigits: 0,
-      //       maximumFractionDigits: 0,
-      //     }).format(context.parsed.y);
-      //   }
-      //   return label;
-      // },
       label: function (context: any) {
         if (context.parsed.y !== null) {
           return new Intl.NumberFormat('en-US', {
@@ -52,3 +37,20 @@ const TooltipOptions = () => {
 };
 
 export default TooltipOptions;
+
+// label: function (context: any) {
+//   let label = context.dataset.label || '';
+
+//   if (label) {
+//     label += ': ';
+//   }
+//   if (context.parsed.y !== null) {
+//     label += new Intl.NumberFormat('en-US', {
+//       style: 'currency',
+//       currency: 'USD',
+//       minimumFractionDigits: 0,
+//       maximumFractionDigits: 0,
+//     }).format(context.parsed.y);
+//   }
+//   return label;
+// },
