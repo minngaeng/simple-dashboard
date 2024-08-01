@@ -20,15 +20,14 @@ const TooltipOptions = () => {
       title: function () {
         return '';
       },
-
-      label: function (context: any) {
-        if (context.parsed.y !== null) {
-          return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-          }).format(context.parsed.y);
+      label: function (context) {
+        const value = context.parsed.y;
+        if (value !== null) {
+          const formattedValue =
+            value >= 1000
+              ? `$${(value / 1000).toFixed(1)}K`
+              : `$${value.toString()}`;
+          return formattedValue;
         }
         return '';
       },
