@@ -2,6 +2,7 @@
 import { Chart } from 'chart.js';
 
 import React, { useEffect, useRef } from 'react';
+import TooltipOptions from './TooltipOptions';
 
 const BarCard = () => {
   const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -78,6 +79,9 @@ const BarCard = () => {
                 stepSize: 2000,
               },
             },
+          },
+          plugins: {
+            tooltip: TooltipOptions(),
           },
         },
       };
