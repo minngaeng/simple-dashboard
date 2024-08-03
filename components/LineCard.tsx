@@ -1,5 +1,5 @@
 'use client';
-import { Chart } from 'chart.js/auto';
+import { Chart, TooltipOptions as TooltipOptionsType } from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
 import TooltipOptions from './TooltipOptions';
 
@@ -52,7 +52,9 @@ function LineCard() {
               ],
               fill: true,
               borderColor: '#8470FF',
-              backgroundColor: ({ chart }) => {
+              backgroundColor: ({ chart }: {
+                chart: any
+              }) => {
                 const { chartArea } = chart;
                 if (chartArea) {
                   const gradient = ctx.createLinearGradient(
@@ -96,7 +98,7 @@ function LineCard() {
             legend: {
               display: false,
             },
-            tooltip: TooltipOptions(),
+            tooltip: TooltipOptions() as unknown as TooltipOptionsType,
           },
 
           scales: {
