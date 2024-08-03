@@ -1,6 +1,7 @@
 'use client';
-import { Chart } from 'chart.js/auto';
+import { Chart, TooltipOptions as TooltipOptionsType } from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
+import TooltipOptions from './TooltipOptions';
 
 function LineCard() {
   const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -51,7 +52,9 @@ function LineCard() {
               ],
               fill: true,
               borderColor: '#8470FF',
-              backgroundColor: ({ chart }) => {
+              backgroundColor: ({ chart }: {
+                chart: any
+              }) => {
                 const { chartArea } = chart;
                 if (chartArea) {
                   const gradient = ctx.createLinearGradient(
@@ -95,45 +98,7 @@ function LineCard() {
             legend: {
               display: false,
             },
-            tooltip: {
-              displayColors: false,
-              borderColor: 'rgb(229, 231, 235)',
-              borderWidth: 1,
-              caretSize: 0,
-              caretPadding: 15,
-              enabled: true,
-              backgroundColor: 'rgb(255,255,255)',
-              boxWidth: 1,
-              bodyColor: 'rgb(75, 85, 99)',
-              bodyFont: {
-                size: 14,
-                family: 'Arial',
-                style: 'normal',
-                weight: 'normal',
-                lineHeight: 1.2,
-              },
-              callbacks: {
-                title: function () {
-                  return '';
-                },
-                label: function (context) {
-                  let label = context.dataset.label || '';
-
-                  if (label) {
-                    label += ': ';
-                  }
-                  if (context.parsed.y !== null) {
-                    label += new Intl.NumberFormat('en-US', {
-                      style: 'currency',
-                      currency: 'USD',
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    }).format(context.parsed.y);
-                  }
-                  return label;
-                },
-              },
-            },
+            tooltip: TooltipOptions() as unknown as TooltipOptionsType,
           },
 
           scales: {
