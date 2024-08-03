@@ -20,7 +20,7 @@ const TooltipOptions = () => {
       title: function () {
         return '';
       },
-      label: function (context) {
+      label: function (context: any) {
         const value = context.parsed.y;
         if (value !== null) {
           const formattedValue =
