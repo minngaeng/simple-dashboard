@@ -99,7 +99,7 @@ const BarCard = () => {
               beginAtZero: true,
               ticks: {
                 callback: function (val: number) {
-                  console.log(val);
+                  // console.log(val);
                   if (val === 0) return 0;
                   return `$${val / 1000}K`;
                 },
