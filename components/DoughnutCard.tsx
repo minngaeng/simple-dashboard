@@ -14,6 +14,7 @@ function DoughnutCard() {
           {
             data: [10, 20, 30],
             borderWidth: 0,
+            backgroundColor: ['#8470FF', '#67BFFF', '#4634B1'],
           },
         ],
 
