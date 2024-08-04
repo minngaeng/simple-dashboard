@@ -116,7 +116,10 @@ const BarCard = () => {
         },
       };
 
-      const chartInstance = new Chart(canvas.current, config as ChartConfiguration);
+      const chartInstance = new Chart(
+        canvas.current,
+        config as ChartConfiguration,
+      );
       setChartInstance(chartInstance);
       updateLegendItems(chartInstance);
 
@@ -149,7 +152,7 @@ const BarCard = () => {
                   <span>동그라미</span>
                   {/* value는 format */}
                   <span className="text-red-500">{value}</span>
-                  <span className={isHidden ? "text-red-500" : "text-black"} >
+                  <span className={isHidden ? 'text-red-500' : 'text-black'}>
                     {label}
                   </span>
                 </button>
