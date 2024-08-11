@@ -1,13 +1,32 @@
 'use client';
 
-import { Chart } from 'chart.js';
-import { useEffect, useRef } from 'react';
+import { Chart, LegendItem } from 'chart.js';
+import { useEffect, useRef, useState } from 'react';
+
+interface LegendItemData {
+  index: number;
+  text: string;
+  fillStyle: string;
+}
 
 function DoughnutCard() {
   const myChart = useRef<HTMLCanvasElement | null>(null);
 
+  const [chartInstance, setChartInstance] = useState<Chart<'doughnut'> | null>(
+    null,
+  );
+  const [legendItems, setLegendItems] = useState<LegendItemData[]>([]);
 
-  
+  const updateLegendItems = (chart: any) => {
+    const generateLabels =
+      chart.options.plugins?.legend?.labels?.generateLabels;
+
+    if (generateLabels) {
+      const items = generateLabels(chart) as LegendItemData[];
+
+      setLegendItems(items);
+    }
+  };
 
   useEffect(() => {
     const chart = new Chart(myChart.current as HTMLCanvasElement, {
@@ -27,41 +46,52 @@ function DoughnutCard() {
         cutout: '80%',
         plugins: {
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
+            labels: {
+              generateLabels: function (chart): LegendItem[] {
+                const data = chart.data;
+
+                if (data.labels && data.datasets.length > 0) {
+                  return data.labels.map((label, index) => {
+                    return {
+                      index,
+                      text: label as string,
+                      fillStyle: '#ffff00',
+                    };
+                  });
+                }
+                return [];
+              },
+            },
           },
         },
       },
     });
 
+    setChartInstance(chadrt);
+    updateLegendItems(chart);
+
     return () => chart.destroy();
   }, []);
 
-  return <canvas ref={myChart}></canvas>;
+  const handleClick = (index: number) => {
+    if (chartInstance) {
+      chartInstance.toggleDataVisibility(index);
+      chartInstance.update();
+    }
+  };
+
+  return (
+    <>
+      <canvas ref={myChart}></canvas>
+      {legendItems.map((el, index) => (
+        <div key={index} onClick={() => handleClick(index)}>
+          {el.text}
+        </div>
+      ))}
+    </>
+  );
 }
 
 export default DoughnutCard;
-
-// onClick: function (e, legendItem, legend) {
-//   console.log('e', e);
-//   console.log('legendItem', legendItem);
-//   console.log('legend', legend);
-//   const index = legendItem.index;
-
-//   const ci = legend.chart;
-
-//   console.log('meta', ci.getDatasetMeta(0));
-
-//   if (index === undefined) return;
-//   const meta = ci.getDatasetMeta(0); // Assuming you have only one dataset
-//   const item = meta.data[index];
-
-//   if (ci.isDatasetVisible(index)) {
-//     ci.hide(0, index);
-//     // legendItem.hidden = false;
-//   } else {
-//     ci.show(0, index);
-//     // legendItem.hidden = false;
-//   }
-//   ci.update();
-// },
