@@ -1,10 +1,32 @@
 'use client';
 
-import { Chart } from 'chart.js';
-import { useEffect, useRef } from 'react';
+import { Chart, LegendItem } from 'chart.js';
+import { useEffect, useRef, useState } from 'react';
+
+const Legend = (props: {
+  items: LegendItem[];
+  onClickItem: (index: number) => void;
+}) => {
+  const { items, onClickItem } = props;
+
+  return (
+    <>
+      {items.map((item, index) => {
+        return (
+          <p key={index} onClick={() => onClickItem(index)}>
+            {item.text}
+          </p>
+        );
+      })}
+    </>
+  );
+};
 
 function DoughnutCard() {
   const myChart = useRef<HTMLCanvasElement | null>(null);
+
+  const [chart, setChart] = useState<Chart<'doughnut'> | null>(null);
+  const [legendItems, setLegendItems] = useState<LegendItem[]>([]);
 
   useEffect(() => {
     const chart = new Chart(myChart.current as HTMLCanvasElement, {
@@ -24,16 +46,39 @@ function DoughnutCard() {
         cutout: '80%',
         plugins: {
           legend: {
-            position: 'bottom',
+            display: false,
           },
         },
       },
     });
+    setChart(chart);
+    updateLegendItems(chart);
 
     return () => chart.destroy();
   }, []);
 
-  return <canvas ref={myChart}></canvas>;
+  const handleLegendClick = (index: number) => {
+    if (chart) {
+      chart.toggleDataVisibility(index);
+      chart.update();
+      updateLegendItems(chart);
+    }
+  };
+
+  const updateLegendItems = (chart: Chart<'doughnut'>) => {
+    if (!chart) return;
+    const generator = chart?.options?.plugins?.legend?.labels?.generateLabels;
+    setLegendItems(generator ? generator(chart as Chart) : []);
+  };
+
+  return (
+    <>
+      <canvas ref={myChart}></canvas>
+      <div>
+        <Legend items={legendItems} onClickItem={handleLegendClick} />
+      </div>
+    </>
+  );
 }
 
 export default DoughnutCard;
