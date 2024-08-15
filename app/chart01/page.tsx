@@ -8,6 +8,7 @@ function page() {
       <div>
         <LineCard />
         <BarCard />
+        
       </div>
     </div>
   );
