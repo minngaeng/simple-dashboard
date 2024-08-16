@@ -74,6 +74,9 @@ const SVGEditor: React.FC = () => {
             {selectedCircle && selectedCircle.id === circle.id && (
               <circle
                 // TODO: task2. 선택된 원의 테두리를 표시하세요.
+                cx={circle.cx}
+                cy={circle.cy}
+                r={circle.r}
                 fill="none"
                 stroke="black"
                 strokeWidth="2"
