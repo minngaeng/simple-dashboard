@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { tailwindTheme } from '../../lib/tailwind-theme';
-import { Filler } from 'chart.js';
 
 interface Circle {
   id: number;
@@ -46,8 +45,11 @@ const SVGEditor: React.FC = () => {
   const changeSize = (size: number) => {
     // TODO: task4. 선택된 원의 크기를 변경하세요.
     if (selectedCircle) {
-      // setCircles
-      // setSelectedCircle
+      const updatedCircles = circles.map((circle) =>
+        circle.id === selectedCircle.id ? { ...circle, r: size } : circle,
+      );
+      setCircles(updatedCircles);
+      setSelectedCircle({ ...selectedCircle, r: size });
     }
   };
 
