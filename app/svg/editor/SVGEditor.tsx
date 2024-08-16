@@ -20,9 +20,9 @@ const SVGEditor: React.FC = () => {
       id: Date.now(),
       fill: tailwindTheme.colors.amber[500],
       // TODO: task1. 필요한 속성 추가
-      cx: 400,
-      cy: 400,
-      r: 40,
+      cx: Math.random() * 360,
+      cy: Math.random() * 360,
+      r: 20,
     };
     setCircles([...circles, newCircle]);
   };
