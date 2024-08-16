@@ -64,6 +64,9 @@ const SVGEditor: React.FC = () => {
           <g key={circle.id}>
             <circle
               // TODO: task1. 필요한 속성 추가
+              cx={circle.cx}
+              cy={circle.cy}
+              r={circle.r}
               fill={circle.fill}
               onClick={() => handleCircleClick(circle)}
               className="cursor-pointer"
