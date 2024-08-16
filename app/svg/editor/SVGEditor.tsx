@@ -22,7 +22,7 @@ const SVGEditor: React.FC = () => {
       // TODO: task1. 필요한 속성 추가
       cx: 400,
       cy: 400,
-      r: 50,
+      r: 40,
     };
     setCircles([...circles, newCircle]);
   };
