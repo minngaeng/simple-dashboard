@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { tailwindTheme } from '../../lib/tailwind-theme';
+import { Filler } from 'chart.js';
 
 interface Circle {
   id: number;
@@ -34,8 +35,11 @@ const SVGEditor: React.FC = () => {
   const changeColor = (color: string) => {
     // TODO: task3. 선택된 원의 색상을 변경하세요.
     if (selectedCircle) {
-      // setCircles
-      // setSelectedCircle
+      const updatedCircles = circles.map((circle) =>
+        circle.id === selectedCircle.id ? { ...circle, fill: color } : circle,
+      );
+      setCircles(updatedCircles);
+      setSelectedCircle({ ...selectedCircle, fill: color });
     }
   };
 
