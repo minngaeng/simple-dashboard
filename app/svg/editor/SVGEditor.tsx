@@ -6,6 +6,9 @@ interface Circle {
   id: number;
   fill: string;
   // TODO: task1. 필요한 속성 추가
+  cx: number;
+  cy: number;
+  r: number;
 }
 
 const SVGEditor: React.FC = () => {
@@ -17,6 +20,9 @@ const SVGEditor: React.FC = () => {
       id: Date.now(),
       fill: tailwindTheme.colors.amber[500],
       // TODO: task1. 필요한 속성 추가
+      cx: 400,
+      cy: 400,
+      r: 50,
     };
     setCircles([...circles, newCircle]);
   };
