@@ -69,7 +69,7 @@ function DoughnutCard() {
       },
     });
 
-    setChartInstance(chadrt);
+    setChartInstance(chart);
     updateLegendItems(chart);
 
     return () => chart.destroy();
