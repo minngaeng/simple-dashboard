@@ -32,23 +32,36 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ data, width, height }) => {
   }, '');
 
   return (
-    <svg width={width} height={height} overflow={'visible'}>
-      <path d={pathD} fill="none" stroke="blue" strokeWidth={'2'} />
-      {normalizedData.map((point, index) => (
-        <circle
-          className="group"
-          onMouseEnter={() => setHoveredPoint(index)}
-          onMouseLeave={() => setHoveredPoint(null)}
-          key={index}
-          cx={(index / (normalizedData.length - 1)) * width}
-          cy={height - point}
-          r="4"
-          fill="#8470ff"
-        />
-      ))}
-      {hoveredPoint && <text className="group-hover:visible invisible" />}
-    </svg>
+    <>
+      <svg width={width} height={height} overflow={'visible'}>
+        <path d={pathD} fill="none" stroke="blue" strokeWidth={'2'} />
+        {normalizedData.map((point, index) => (
+          <circle
+            className="group"
+            onMouseEnter={() => setHoveredPoint(index)}
+            onMouseLeave={() => setHoveredPoint(null)}
+            key={index}
+            cx={(index / (normalizedData.length - 1)) * width}
+            cy={height - point}
+            r="4"
+            fill="#8470ff"
+          />
+        ))}
+        {hoveredPoint && (
+          <text
+            x={(hoveredPoint / (data.length - 1)) * width}
+            y={height - normalizedData[hoveredPoint] - 10}
+            fontSize="12px"
+            textAnchor="middle"
+          >
+            {data[hoveredPoint]}
+          </text>
+        )}
+      </svg>
+    </>
   );
 };
 
 export default MyLineChart;
+
+// className="group-hover:visible invisible"
