@@ -31,6 +31,25 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ data, width, height }) => {
     return `${acc} ${command} ${x},${y}`;
   }, '');
 
+  const handleMouseMove = (
+    e: React.MouseEvent<SVGCircleElement, MouseEvent>,
+  ) => {
+    const circle = e.target;
+
+    if (circle instanceof SVGCircleElement) {
+      const rect = circle.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      console.log(e.clientX, '-', rect.left, '=', x);
+      console.log('width', rect.width);
+      const isHovered = x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
+
+      if (!isHovered) {
+        setHoveredPoint(null);
+      }
+    }
+  };
+
   return (
     <>
       <svg width={width} height={height} overflow={'visible'}>
@@ -39,7 +58,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ data, width, height }) => {
           <circle
             className="group"
             onMouseEnter={() => setHoveredPoint(index)}
-            onMouseLeave={() => setHoveredPoint(null)}
+            onMouseLeave={handleMouseMove}
             key={index}
             cx={(index / (normalizedData.length - 1)) * width}
             cy={height - point}
@@ -58,10 +77,11 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ data, width, height }) => {
               stroke="black"
               rx="5"
               ry="5"
+              pointerEvents={'none'}
             />
             <text
               x={(hoveredPoint / (data.length - 1)) * width}
-              y={height - normalizedData[hoveredPoint] - 10}
+              y={height - normalizedData[hoveredPoint] - 15}
               fontSize="12px"
               textAnchor="middle"
             >
