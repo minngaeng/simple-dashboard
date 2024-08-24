@@ -68,17 +68,6 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ data, width, height }) => {
         ))}
         {hoveredPoint && (
           <>
-            <rect
-              x={(hoveredPoint / (data.length - 1)) * width - 20}
-              y={height - normalizedData[hoveredPoint] - 30}
-              width="40"
-              height="30"
-              fill="white"
-              stroke="black"
-              rx="5"
-              ry="5"
-              pointerEvents={'none'}
-            />
             <text
               x={(hoveredPoint / (data.length - 1)) * width}
               y={height - normalizedData[hoveredPoint] - 15}
