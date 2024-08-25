@@ -16,7 +16,7 @@ const DonutChart = ({
   useEffect(() => {
     setTimeout(() => {
       setPercentage(displayedPercentage);
-    }, 1000);
+    }, 100);
   }, []);
 
   const normalizedRadius = radius - strokeWidth / 2;
@@ -34,6 +34,7 @@ const DonutChart = ({
         cy={radius}
       />
       <circle
+        className="transition-[stroke-dashoffset] duration-1000 ease-in-out"
         stroke="blue"
         fill="transparent"
         strokeWidth={strokeWidth}
