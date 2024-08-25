@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface IDoughnutProps {
-  percentage: number;
+  displayedPercentage: number;
   radius: number;
   strokeWidth: number;
 }
 
-const DonutChart = ({ percentage, radius, strokeWidth }: IDoughnutProps) => {
+const DonutChart = ({
+  displayedPercentage,
+  radius,
+  strokeWidth,
+}: IDoughnutProps) => {
+  const [percentage, setPercentage] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPercentage(displayedPercentage);
+    }, 1000);
+  }, []);
+
   const normalizedRadius = radius - strokeWidth / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
