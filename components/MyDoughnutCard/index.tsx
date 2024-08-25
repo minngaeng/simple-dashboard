@@ -27,7 +27,13 @@ const MyDoughnutCard = () => {
           strokeWidth={32}
         />
       </div>
-      <button onClick={handleClick}>Increase</button>
+      <button
+        className="border-none bg-blue-500
+        w-[80px] h-[30px] hover:bg-blue-600 text-white rounded borer-none cursor-pointer"
+        onClick={handleClick}
+      >
+        Increase
+      </button>
     </>
   );
 };
