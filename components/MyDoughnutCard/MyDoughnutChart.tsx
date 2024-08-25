@@ -45,12 +45,12 @@ const DonutChart = ({
         cy={radius}
       />
       <text
+        fill="white"
         x="50%"
         y="50%"
         dominantBaseline="middle"
         textAnchor="middle"
         fontSize="20px"
-        fill="black"
       >
         {`${percentage}%`}
       </text>
