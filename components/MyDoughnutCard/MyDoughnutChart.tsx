@@ -11,10 +11,8 @@ const DonutChart = ({ percentage, radius, strokeWidth }: IDoughnutProps) => {
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
-  console.log(percentage, radius, strokeWidth);
-
   return (
-    <svg>
+    <svg width={radius * 2} height={radius * 2}>
       <circle
         stroke="lightgrey"
         fill="transparent"
@@ -27,8 +25,8 @@ const DonutChart = ({ percentage, radius, strokeWidth }: IDoughnutProps) => {
         stroke="blue"
         fill="transparent"
         strokeWidth={strokeWidth}
-        strokeDasharray={circumference + ' ' + circumference}
-        style={{ strokeDashoffset }}
+        strokeDasharray={circumference}
+        strokeDashoffset={strokeDashoffset}
         r={normalizedRadius}
         cx={radius}
         cy={radius}
