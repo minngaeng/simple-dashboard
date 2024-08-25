@@ -17,7 +17,7 @@ const DonutChart = ({
     setTimeout(() => {
       setPercentage(displayedPercentage);
     }, 100);
-  }, []);
+  }, [displayedPercentage]);
 
   const normalizedRadius = radius - strokeWidth / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
