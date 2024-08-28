@@ -9,6 +9,7 @@ interface LegendItemData {
   value: number;
   index: number;
   isHidden: boolean;
+  borderColor: string;
 }
 const BarCard = () => {
   const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -27,6 +28,7 @@ const BarCard = () => {
           label: dataset.label || '',
           isHidden: !chart.isDatasetVisible(index),
           index,
+          borderColor: dataset.borderColor as string,
         };
       },
     );
@@ -53,9 +55,9 @@ const BarCard = () => {
             barPercentage: 1.0,
             barThickness: 'flex',
             maxBarThickness: 8,
-            label: 'green',
+            label: 'Direct',
             data: [800, 1600, 900, 1300, 1950, 1700],
-            backgroundColor: '#67BFFF',
+            backgroundColor: '#1f2021',
             borderColor: '#67BFFF',
 
             borderRadius: 10,
@@ -65,7 +67,7 @@ const BarCard = () => {
             barPercentage: 1.0,
             barThickness: 'flex',
             maxBarThickness: 10,
-            label: 'blue',
+            label: 'Indirect',
             data: [4900, 2600, 5350, 4800, 5200, 4800],
             backgroundColor: '#8470FF',
             borderColor: '#8470FF',
@@ -99,7 +101,6 @@ const BarCard = () => {
               beginAtZero: true,
               ticks: {
                 callback: function (val: number) {
-                  // console.log(val);
                   if (val === 0) return 0;
                   return `$${val / 1000}K`;
                 },
@@ -144,15 +145,32 @@ const BarCard = () => {
       <div>
         <ul>
           {legendItems.map((item) => {
-            const { value, label, index, isHidden } = item;
+            console.log(legendItems);
+            const { value, label, index, isHidden, borderColor } = item;
             return (
               <li key={index}>
                 {/* TODO: tailwind 사용해서 스타일링 */}
-                <button onClick={() => handleLegendClick(index)}>
-                  <span>동그라미</span>
+                <button
+                  onClick={() => handleLegendClick(index)}
+                  className="flex items-center"
+                >
+                  <span
+                    style={{ borderColor: isHidden ? '#D1D5DB' : borderColor }}
+                    className="inline-block w-2 h-2 border-4 border-current rounded-full bg-white box-content {}"
+                  ></span>
                   {/* value는 format */}
-                  <span className="text-red-500">{value}</span>
-                  <span className={isHidden ? 'text-red-500' : 'text-black'}>
+                  <span
+                    className={`ml-2 font-semibold ${
+                      isHidden ? 'text-gray-300' : 'text-gray-700'
+                    }`}
+                  >
+                    {formatValue(value)}
+                  </span>
+                  <span
+                    className={`ml-2 font-light ${
+                      isHidden ? 'text-gray-300' : 'text-gray-500'
+                    }`}
+                  >
                     {label}
                   </span>
                 </button>
@@ -177,6 +195,12 @@ const formatDateLabel = (dateLabel: string) => {
   return date.toLocaleDateString('en-US', options);
 };
 
+const formatValue = (value: number) => {
+  if (value >= 1000) {
+    return `$${parseFloat((value / 1000).toFixed(2))}K`;
+  }
+  return `$${value}`;
+};
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
 
