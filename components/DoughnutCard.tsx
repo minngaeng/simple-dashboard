@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 interface LegendItemData {
   index: number;
   text: string;
-  fillStyle: string;
+  fillStyle: string[];
 }
 
 function DoughnutCard() {
@@ -57,7 +57,7 @@ function DoughnutCard() {
                     return {
                       index,
                       text: label as string,
-                      fillStyle: '#ffff00',
+                      fillStyle: ['#8470FF', '#67BFFF', '#4634B1'],
                     };
                   });
                 }
@@ -82,14 +82,26 @@ function DoughnutCard() {
     }
   };
 
+  console.log('legend', legendItems);
+
   return (
     <>
       <canvas ref={myChart}></canvas>
-      {legendItems.map((el, index) => (
-        <div key={index} onClick={() => handleClick(index)}>
-          {el.text}
-        </div>
-      ))}
+      <div className="flex justify-center gap-1 mt-6 ">
+        {legendItems.map((el, index) => (
+          <div
+            key={index}
+            onClick={() => handleClick(index)}
+            className="p-2 flex items-center bg-red-100 text-stone-500 font-normal border-solid border-[1px] rounded-3xl border-none cursor-pointer hover:bg-red-200"
+          >
+            <div
+              className="w-4 h-4 mr-2 rounded "
+              style={{ backgroundColor: el.fillStyle[index] }}
+            ></div>
+            {el.text}
+          </div>
+        ))}
+      </div>
     </>
   );
 }
