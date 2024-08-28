@@ -84,8 +84,6 @@ function DoughnutCard() {
     }
   };
 
-  console.log('legend', legendItems);
-
   return (
     <>
       <canvas ref={myChart}></canvas>
