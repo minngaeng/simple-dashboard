@@ -143,16 +143,15 @@ const BarCard = () => {
   return (
     <>
       <div>
-        <ul>
+        <ul className="flex flex-row gap-5 items-center">
           {legendItems.map((item) => {
-            console.log(legendItems);
             const { value, label, index, isHidden, borderColor } = item;
             return (
               <li key={index}>
                 {/* TODO: tailwind 사용해서 스타일링 */}
                 <button
                   onClick={() => handleLegendClick(index)}
-                  className="flex items-center"
+                  className="flex flex-row items-center"
                 >
                   <span
                     style={{ borderColor: isHidden ? '#D1D5DB' : borderColor }}
