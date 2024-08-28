@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 interface LegendItemData {
   index: number;
   text: string;
-  fillStyle: string[];
+  fillStyle: string;
 }
 
 function DoughnutCard() {
@@ -53,11 +53,13 @@ function DoughnutCard() {
                 const data = chart.data;
 
                 if (data.labels && data.datasets.length > 0) {
+                  const backgroundColors = data.datasets[0]
+                    .backgroundColor as string[];
                   return data.labels.map((label, index) => {
                     return {
                       index,
                       text: label as string,
-                      fillStyle: ['#8470FF', '#67BFFF', '#4634B1'],
+                      fillStyle: backgroundColors[index], // Use the corresponding background color
                     };
                   });
                 }
@@ -96,7 +98,7 @@ function DoughnutCard() {
           >
             <div
               className="w-4 h-4 mr-2 rounded "
-              style={{ backgroundColor: el.fillStyle[index] }}
+              style={{ backgroundColor: el.fillStyle }}
             ></div>
             {el.text}
           </div>
