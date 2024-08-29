@@ -59,7 +59,7 @@ function DoughnutCard() {
                     return {
                       index,
                       text: label as string,
-                      fillStyle: backgroundColors[index], // Use the corresponding background color
+                      fillStyle: backgroundColors[index],
                     };
                   });
                 }
